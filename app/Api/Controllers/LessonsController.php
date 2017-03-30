@@ -10,8 +10,9 @@ namespace App\Api\Controllers;
 
 use App\Api\Transformers\LessonTransformer;
 use App\Lesson;
-use Illuminate\Http\Request;
-//use Dingo\Api\Http\Request;
+//use Illuminate\Http\Request;
+use Dingo\Api\Http\Request;
+use Storage;
 class LessonsController extends BaseController
 {
     public function index()
@@ -59,9 +60,12 @@ class LessonsController extends BaseController
     {
         $file = $request->file('image');
 
-        $destinationPath = 'uploads/';
+        //$destinationPath = 'uploads/';
         $filename = $file->getClientOriginalName();
-        $file->move($destinationPath, $filename);
-        return $this->response->created();
+        $path = 'images/';
+        $t = Storage::disk('s3')->put($path.$filename, file_get_contents($request->file('image')->getRealPath()), 'public');
+        $imageName = Storage::disk('s3')->url($path.$filename);
+        //$file->move($destinationPath, $filename);
+        return $this->response->created('',$imageName);
     }
 }
