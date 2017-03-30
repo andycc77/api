@@ -61,7 +61,7 @@ class LessonsController extends BaseController
         $file = $request->file('image');
 
         //$destinationPath = 'uploads/';
-        $filename = $file->getClientOriginalName();
+        $filename = \Auth::user()->id.'_'.time().$file->getClientOriginalName();
         $path = 'images/';
         $t = Storage::disk('s3')->put($path.$filename, file_get_contents($request->file('image')->getRealPath()), 'public');
         $imageName = Storage::disk('s3')->url($path.$filename);
