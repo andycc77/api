@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "andycc77/api",
+    "description": "The Laravel api.",
+    "keywords": ["framework", "laravel, api"],
     "license": "MIT",
     "type": "project",
     "require": {
